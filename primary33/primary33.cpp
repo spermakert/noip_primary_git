@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
 	freopen("in.in","r",stdin);
-	freopen("out.out","w",stdout);
+	//freopen("out.out","w",stdout);
 
 	int n;
 	cin>>n;
@@ -55,19 +55,28 @@ int main()
 
 	_ans=_v[0]; //如果不存在多个，则为第一个
 	//判断是否存在多个相等的
-	for(int i=0;i<n;i++)
+	for(int i=0;i<n;)
 	{
-		for(int j=0;j<n;j++)
+		if(k[i]==k[i+1])
 		{
-			if(k[i]==k[j])
+			if(_v[i] > _v[i+1])
 			{
-				if(_v[i] > _v[j])
-				{
-					ans = _v[j];
-				}
+				_ans = _v[i+1];
 			}
 		}
+		i=i+2;
 	}
+
+	for(int i=0;i<n;i++)
+	{
+		cout<<_v[i]<<" ";
+	}
+	cout<<endl;
+	for(int i=0;i<n;i++)
+	{
+		cout<<k[i]<<" ";
+	}
+	cout<<endl;
 
 	cout<<_ans<<endl;
 	
