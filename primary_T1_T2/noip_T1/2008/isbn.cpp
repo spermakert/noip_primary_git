@@ -1,64 +1,63 @@
-#include <iostream>
-#include <math.h>
+/*************************************************************************
+    > File Name: isbn.cpp
+    > Author: spermakert
+    > Mail: spermakert@163.com 
+    > Created Time: Sun 16 Sep 2018 10:04:40 PM CST
+ ************************************************************************/
+
+#include<iostream>
+#include<string>
+#include<vector>
 using namespace std;
-
-#define MAXK            13
-
 int main()
 {
-    freopen("isbn.in","r",stdin);
-    freopen("isbn.out","w",stdout);
+	freopen("isbn.in","r",stdin);
+	freopen("isbn.out","w",stdout);
+	string isbn;
+	getline(cin,isbn);
 
-    //0-670-82162-4
+	vector<char> isbn_check;
+	isbn_check.push_back(isbn[0]);
+	for(int i=2;i<5;i++)
+	{
+		isbn_check.push_back(isbn[i]);
+	}
+	for(int i=6;i<11;i++)
+	{
+		isbn_check.push_back(isbn[i]);
+	}
 
-    char isbn[MAXK],ch;
-    scanf("%s",isbn);
+	int dis = 0;
+	int tmp_num = 0;
 
-    int i=0,j=0,isbn_end=0;
-    int k=0;//记录到第几个‘-’
-    while(1)
-    {
-        ch=isbn[i];
-        if(k==3)
-            break;
-        if(ch!='-')
-        {
-            j=j+1;
-            isbn_end=isbn_end+int(ch-'0')*j;
-        }
-        else
-        {
-            k++;
-        }
-        i++;
-    }
-    //printf("%d",isbn_end);
-    int chk=int(isbn[12]-'0');
-    if(isbn_end%11==chk)
-    {
-        cout<<"Right";
-    }
-    else
-    {
-        isbn_end = isbn_end%11;
-        if(isbn_end==10)
-            isbn[12]='X';
-        else
-            isbn[12]=isbn_end+'0';
-        i=0;
-        ch='l';
-        while(1)
-        {
-            if(ch=='\0')
-            {
-                break;
-            }
-            ch=isbn[i];
-            cout<<isbn[i];
-            i++;
-        }
-    }
-    cout<<endl;
-    fclose(stdout);
-    return 0;
+	for(int i=0;i<9;i++)
+	{
+		tmp_num = isbn_check[i] - '0';
+		dis = dis + tmp_num * (i+1);
+	}
+
+	dis = dis % 11;
+	int dis_isbn = isbn[12] - '0';
+	if(dis_isbn==dis)
+	{
+		cout<<"Right"<<endl;
+	}
+	else
+	{
+		for(int i=0;i<9;i++)
+		{
+			if(i==1)
+				cout<<"-";
+			if(i==5)
+				cout<<"-";
+			cout<<isbn_check[i];
+		}
+		cout<<"-";
+		if(dis==10)
+			cout<<"X";
+		else
+			cout<<dis;
+		cout<<endl;
+	}
+	return 0;
 }
