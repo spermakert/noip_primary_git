@@ -38,7 +38,7 @@ int main()
 
 	dis = dis % 11;
 	int dis_isbn = isbn[12] - '0';
-	if(dis_isbn==dis)
+	if(dis_isbn==dis && dis_isbn!=10)
 	{
 		cout<<"Right"<<endl;
 	}
