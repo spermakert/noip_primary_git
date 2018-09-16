@@ -12,13 +12,10 @@ int main()
     scanf("%d",&n);
     for(int i=n-1;i>1;i--)
     {
-        if(prime(i))
+        if(prime(i) && n%i==0)
         {
-            if(n%i==0)
-            {
-                printf("%d",i);
-                break;
-            }
+            printf("%d",i);
+            break;
         }
     }
 

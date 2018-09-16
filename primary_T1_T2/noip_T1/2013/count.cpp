@@ -10,7 +10,7 @@ int main()
     scanf("%d %d",&n,&x);
     //1 2 3 4 5 6 7 8 9 10 11
     //1
-    for(int i=1;i<n+1;i++)
+    for(int i=1;i<=n;i++)
     {
         tmp=i;
         while(tmp!=0)
