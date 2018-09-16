@@ -1,0 +1,96 @@
+/*************************************************************************
+    > File Name: water.cpp
+    > Author: spermakert
+    > Mail: spermakert@163.com
+    > Created Time: Fri 27 Aug 2018 14:50:54 PM CST
+ ************************************************************************/
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+bool compare(int a,int b)
+{
+  return a>b;
+}
+int main()
+{
+    freopen ("water.in","r",stdin);
+    //freopen ("librarian.out","w",stdout);
+    int n,m;
+    cin>>n>>m;
+    int water[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>water[i];
+    }
+
+
+
+    int ans=0;
+
+ 
+	
+    //sort(water,water+n,compare);
+
+	
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=0;j<n-1-i;j++)
+		{
+			if(water[j]>water[j+1])
+			   swap(water[j],water[j+1]);
+		}
+	}
+	
+
+	for(int i=0;i<n;i++)
+    {
+        //cout<<water[i]<<" ";
+    }
+
+    if(n<=m)
+    {
+        cout<<water[0];
+    }
+    else if(n>m)
+    {
+        int water_now[10001];
+        int water_wait[10001]={0};
+        int i,j,k;
+        //存放当前接水接水的
+        for(i=0;i<m;i++)
+        {
+            water_now[i]=water[i];
+            //cout<<water[i]<<"_ ";
+        }
+        //存放剩下接水的人
+        for(j=0;j<n-m;j++)
+        {
+            water_wait[j]=water[j+m];
+            //cout<<water_wait[j]<<" ";
+        }
+        k=0;
+        while(n>0)
+        {
+            for(i=0;i<m;i++)
+            {
+                water_now[i]--;
+                //cout<<water_now[i]<<"_";
+            }
+            //cout<<"\n";
+            ans++;
+
+            for(i=0;i<m;i++)
+            {
+                if(water_now[i]==0)//接完了替换下一个人
+                {
+                    water_now[i] = water_now[i] + water_wait[k];
+                    k++;
+                    n--;
+                }
+            }
+        }
+        cout<<ans;
+    }
+    return 0;
+}
