@@ -24,7 +24,8 @@ int main()
     string tmp;
     int pos = 0;
     int ans = 0;
-    for(int i=0;i<article.length();i++)
+	int len = article.size();
+    for(int i=0;i<len;i++)
     {
         if(article[i]==' ')
         {
