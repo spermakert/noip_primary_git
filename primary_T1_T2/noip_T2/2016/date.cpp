@@ -69,11 +69,7 @@ bool checkPalindrome(int date_year)
 }
 bool isLeap(int date_year)
 {
-    if(date_year%100!=0&&date_year%4==0)
-    {
-        return true;
-    }
-    if(date_year%400 == 0)
+    if((date_year%100!=0 && date_year%4==0) || date_year%400 == 0)
     {
         return true;
     }

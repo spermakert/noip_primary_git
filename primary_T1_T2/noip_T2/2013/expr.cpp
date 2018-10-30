@@ -11,17 +11,14 @@
 using namespace std;
 int main()
 {
-	freopen("expr.in","r",stdin);
-	freopen("expr.out","w",stdout);
+	freopen("testdata.in","r",stdin);
+	//freopen("expr.out","w",stdout);
 
 	string expr_str;
-	getline(cin,expr_str);
-
+	cin>>expr_str;
 	vector<char> symbol;
 	vector<int> num;
-
-	//1+2*4*6+6+7
-	//
+	
 	int len = expr_str.size();
 	int tmp_num = 0;
 	for(int i=0;i<len;i++)
@@ -30,20 +27,22 @@ int main()
 		{
 			num.push_back(tmp_num);
 			symbol.push_back(expr_str[i]);
-			tmp_num = 0;
+			tmp_num=0;
 		}
 		else
-			tmp_num = tmp_num * 10 + (expr_str[i] - '0') % 10;
+		{
+			tmp_num = tmp_num * 10 + (expr_str[i] - '0');
+		}
 	}
 	num.push_back(tmp_num);
 
-	int ans = 0;
+	long long ans = 0;
 	int symbol_len = symbol.size();
 	for(int i=0;i<symbol_len;i++)
 	{
 		if(symbol[i]=='*')
 		{
-			num[i+1] = num[i] * num[i+1];
+			num[i+1] = (num[i]%10000) * (num[i+1]%10000);
 			num[i] = 0;
 		}
 	}
@@ -52,8 +51,6 @@ int main()
 	{
 		ans = ans + num[i];
 	}
-
-	cout<<ans<<endl;
-
+	cout<<ans%10000<<endl;
 	return 0;
 }

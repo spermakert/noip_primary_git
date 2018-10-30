@@ -1,36 +1,19 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 using namespace std;
-
-bool prime(int n);
 int main()
 {
     freopen("prime.in","r",stdin);
-    freopen("prime.out","w",stdout);
-
-    int n;
-    scanf("%d",&n);
-    for(int i=n-1;i>1;i--)
-    {
-        if(prime(i) && n%i==0)
-        {
-            printf("%d",i);
-            break;
-        }
-    }
-
-    return 0;
-}
-bool prime(int n)
-{
-    double k = sqrt(n);
-    int i;
-    for(i=2;i<k;i++)
+    //freopen("prime.out","w",stdout);
+    long long n;
+    scanf("%lld",&n);
+    for(long long i=2;i*i<n;i++)
     {
         if(n%i==0)
         {
-            return false;
+            printf("%lld",n/i);
+            return 0;
         }
     }
-    return true;
+    return 0;
 }
