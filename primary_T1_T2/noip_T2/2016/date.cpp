@@ -15,7 +15,7 @@ bool isLeap(int date_year);
 int main()
 {
 
-    freopen ("date.in","r",stdin);
+    freopen ("testdata.in","r",stdin);
     freopen ("date.out","w",stdout);
     int date_head,date_end;
 
@@ -28,12 +28,13 @@ int main()
     int count=0;
     for(int i=date_year_head;i<=date_year_end;i++)
     {
+		//printf("%d\n",i);
         if(checkPalindrome(i))//如果满足回文格式
         {
             count++;
         }
     }
-    printf("%d",count);
+	printf("%d\n",count);
 	return 0;
 }
 //传入四位年份，验证反过来是否是合法日期
@@ -50,7 +51,7 @@ bool checkPalindrome(int date_year)
     int month = 10 * num[0] + num[1];
     int day   = 10 * num[2] + num[3];
     //printf("%d-%d-%d\n",date_year,month,day);
-    //合:法的月和日 [9220 0229][8220 0228] [1310 0131] [0310 0130 不用验证大小月，因为小月的年份不合法，不会出现小月是回文的情况]
+    //合:法的月和日 [9220 0229][8220 0228] [1310 0131] [0310 0130 ]
     if(month<13&&month>0&&day>0&&day<32)
     {
         //验证闰年
@@ -58,11 +59,17 @@ bool checkPalindrome(int date_year)
         {
             if(month==2)  //非闰年2月是29也不合法
             {
-                if(day==29)
-                    return false;
+				if(day>=29)
+					return false;
             }
         }
         //printf("%d-%d-%d\n",date_year,month,day);
+        //min max month
+        if(month==2||month==4||month==6||month==9||month==11)
+        {
+            if(day>=31)
+                return false;
+        }
         return true;
     }
     return false;
